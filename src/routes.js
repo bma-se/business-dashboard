@@ -17,15 +17,18 @@
 */
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
+import Settings from "@material-ui/icons/Settings";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
-import Report from "@material-ui/icons/Report";
+import Create from "@material-ui/icons/Create";
+import Description from "@material-ui/icons/Description";
+
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
+import Summary from "views/Summary/Summary.js";
 
 import Icons from "views/Icons/Icons.js";
 
@@ -41,17 +44,24 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
+    path: "/table",
+    name: "Reports",
+    icon: "content_paste",
+    component: TableList,
+    layout: "/admin"
+  },
+  {
     path: "/user",
-    name: "User Profile",
-    icon: Report,
+    name: "Boundaries",
+    icon: Create,
     component: UserProfile,
     layout: "/admin"
   },
   {
-    path: "/table",
-    name: "Table List",
-    icon: "content_paste",
-    component: TableList,
+    path: "/summary",
+    name: "Settings",
+    icon: Settings,
+    component: Summary,
     layout: "/admin"
   }
 ];
