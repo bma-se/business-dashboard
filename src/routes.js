@@ -1,69 +1,83 @@
-/*!
+// import Dashboard from "@material-ui/icons/Dashboard";
+// import Settings from "@material-ui/icons/Settings";
+// import LibraryBooks from "@material-ui/icons/LibraryBooks";
+// import BubbleChart from "@material-ui/icons/BubbleChart";
+// import LocationOn from "@material-ui/icons/LocationOn";
+// import Create from "@material-ui/icons/Create";
+// import Description from "@material-ui/icons/Description";
 
-=========================================================
-* Material Dashboard React - v1.8.0
-=========================================================
+// // core components/views for Admin layout
+// import DashboardPage from "views/Dashboard/Dashboard.js";
+// import UserProfile from "views/UserProfile/UserProfile.js";
+// import TableList from "views/TableList/TableList.js";
+// import Summary from "views/Summary/Summary.js";
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-react/blob/master/LICENSE.md)
+// import Icons from "views/Icons/Icons.js";
 
-* Coded by Creative Tim
+// import NotificationsPage from "views/Notifications/Notifications.js";
+// // core components/views for RTL layout
 
-=========================================================
+// const dashboardRoutes = [
+//   {
+//     path: "/dashboard",
+//     name: "Dashboard",
+//     icon: Dashboard,
+//     component: DashboardPage,
+//     layout: "/admin"
+//   },
+//   {
+//     path: "/table",
+//     name: "Reports",
+//     icon: "content_paste",
+//     component: TableList,
+//     layout: "/admin"
+//   },
+//   {
+//     path: "/user",
+//     name: "Boundaries",
+//     icon: Create,
+//     component: UserProfile,
+//     layout: "/admin"
+//   },
+//   {
+//     path: "/summary",
+//     name: "Settings",
+//     icon: Settings,
+//     component: Summary,
+//     layout: "/admin"
+//   }
+// ];
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// export default dashboardRoutes;
 
-*/
-// @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Settings from "@material-ui/icons/Settings";
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import BubbleChart from "@material-ui/icons/BubbleChart";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Create from "@material-ui/icons/Create";
-import Description from "@material-ui/icons/Description";
+import React from "react";
+import { Route, Router } from "react-router-dom";
+import App from "./App";
+import Callback from "./Callback/Callback";
+import Auth from "./Auth/Auth";
+import history from "./history";
 
-// core components/views for Admin layout
-import DashboardPage from "views/Dashboard/Dashboard.js";
-import UserProfile from "views/UserProfile/UserProfile.js";
-import TableList from "views/TableList/TableList.js";
-import Summary from "views/Summary/Summary.js";
+const auth = new Auth();
 
-import Icons from "views/Icons/Icons.js";
-
-import NotificationsPage from "views/Notifications/Notifications.js";
-// core components/views for RTL layout
-
-const dashboardRoutes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: Dashboard,
-    component: DashboardPage,
-    layout: "/admin"
-  },
-  {
-    path: "/table",
-    name: "Reports",
-    icon: "content_paste",
-    component: TableList,
-    layout: "/admin"
-  },
-  {
-    path: "/user",
-    name: "Boundaries",
-    icon: Create,
-    component: UserProfile,
-    layout: "/admin"
-  },
-  {
-    path: "/summary",
-    name: "Settings",
-    icon: Settings,
-    component: Summary,
-    layout: "/admin"
+const handleAuthentication = ({ location }) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
   }
-];
+};
 
-export default dashboardRoutes;
+export const mainRoutes = () => {
+  return (
+    <Router history={history}>
+      <div>
+        <Route path="/" render={props => <App auth={auth} {...props} />} />
+        <Route
+          path="/callback"
+          render={props => {
+            handleAuthentication(props);
+            return <Callback {...props} />;
+          }}
+        />
+      </div>
+    </Router>
+  );
+};
