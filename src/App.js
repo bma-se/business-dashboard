@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import "./App.css";
 import Dashboard from "./views/Dashboard/Dashboard";
 import SignIn from "./views/SignIn/SignIn";
+import Summary from "views/Summary/Summary";
 class App extends Component {
   goTo(route) {
     this.props.history.replace(`/${route}`);
