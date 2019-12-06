@@ -40,7 +40,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
+		"url": "git+https://samuelkerosi.github.io/bma-se-business-dashboard.git"
 	},
 	"keywords": [],
 	"author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
@@ -59,6 +59,7 @@
 		"eslint-config-prettier": "6.0.0",
 		"eslint-plugin-prettier": "3.1.0",
 		"gulp": "4.0.2",
+		"gh-pages": "^1.1.0",
 		"gulp-append-prepend": "1.0.8",
 		"prettier": "1.18.2"
 	},
