@@ -13,6 +13,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput";
+import { TextField } from "@material-ui/core";
 
 const styles = {
   cardCategoryWhite: {
@@ -42,7 +43,7 @@ class PostCompany extends Component {
 
     //init state
     this.state = {
-      company_title: "",
+      companytitle: "",
       keywords: []
     };
     this.changeHandler = this.changeHandler.bind(this);
@@ -58,10 +59,10 @@ class PostCompany extends Component {
   submitHandler(event) {
     event.preventDefault();
     console.log(this.state);
-    console.log(this.state.company_title);
+    console.log(this.state.companytitle);
     axios
       .post("https://bmacompanydbwa.azurewebsites.net/companies", {
-        company_title: this.state.company_title,
+        companytitle: this.state.companytitle,
         keywords: []
       })
       .then(response => {
@@ -73,7 +74,7 @@ class PostCompany extends Component {
   }
 
   render() {
-    const { company_title, keywords } = this.state;
+    const { companytitle, keywords } = this.state;
     const classes = useStyles;
     return (
       <div>
@@ -89,14 +90,17 @@ class PostCompany extends Component {
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={5}>
-                    <CustomInput
-                      labelText="Company Title"
+                    <TextField
+                      label="Company Title"
                       onChange={this.changeHandler}
-                      labelProps={company_title}
-                      inputProps={company_title}
-                      name={company_title}
-                      id={company_title}
-                      value={company_title}
+                      labelProps={companytitle}
+                      inputProps={{
+                        name:"companytitle",
+                        id:"companytitle"
+                      }}
+                      name={companytitle}
+                      id={companytitle}
+                      value={this.state.companytitle}
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -106,11 +110,11 @@ class PostCompany extends Component {
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={5}>
-                    <CustomInput
+                    <TextField
                       type="text"
-                      labelText="Keywords"
+                      label="Keywords"
                       id="keywords"
-                      value={keywords}
+                      value={this.state.keywords}
                       onChange={this.changeHandler}
                       formControlProps={{
                         fullWidth: true

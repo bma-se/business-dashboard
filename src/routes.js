@@ -20,7 +20,7 @@ import PostCompany from "views/PostCompany/PostCompany";
 
 const mainRoutes = [
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
